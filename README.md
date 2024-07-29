@@ -1,5 +1,15 @@
 # Dotfiles
 
+## Before switching mac
+
+TODO: Automate this process
+
+1. Dump your current installed apps status as a brewfile (Warning: this will overwrite the old one)
+
+```bash
+brew bundle dump --force --file=~/dotfiles/backup/homebrew/Brewfile --describe
+```
+
 ## Installation
 
 1. [Generate a new public and private SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) by running:

@@ -1,3 +1,4 @@
+tap "charmbracelet/tap"
 tap "fsouza/prettierd"
 tap "fwartner/tap"
 tap "getsentry/tools"
@@ -20,10 +21,6 @@ brew "webp"
 brew "jpeg-xl"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Toolchain of the web
-brew "biome"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
 # Select default apps for documents and URL schemes on macOS
 brew "duti"
 # Platform built on V8 to build network applications
@@ -40,10 +37,6 @@ brew "openjpeg"
 brew "ffmpeg"
 # Create thumbnails for your video files
 brew "ffmpegthumbnailer"
-# macOS CLI for managing custom icons for files and folders
-brew "fileicon"
-# Terminal JSON viewer
-brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Toolkit for image loading and pixel buffer manipulation
@@ -54,136 +47,68 @@ brew "gh"
 brew "ghostscript"
 # Distributed revision control system
 brew "git"
-# Syntax-highlighting pager for git and diff output
-brew "git-delta"
-# Quickly rewrite git repository history
-brew "git-filter-repo"
-# Trim your git remote tracking branches that are merged or gone
-brew "git-trim"
-# Network related modules for glib
-brew "glib-networking"
-# Render markdown on the CLI
-brew "glow"
-# GNU implementation of the famous stream editor
-brew "gnu-sed"
 # Colorize logfiles and command output
 brew "grc"
 # GNU grep, egrep and fgrep
 brew "grep"
-# Toolkit for creating graphical user interfaces
-brew "gtk+3"
-# Generic library support script
-brew "libtool"
-# GNU Ubiquitous Intelligent Language for Extensions
-brew "guile"
 # ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 brew "libheif"
 # LLVM's OpenMP runtime library
 brew "libomp", link: true
+# Generic library support script
+brew "libtool"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
-# Image loading and rendering library
-brew "imlib2"
-# Command-line pager for JSON data
-brew "jless"
-# Lightweight and flexible command-line JSON processor
-brew "jq"
-# Library to render SVG files using Cairo
-brew "librsvg"
 # Powerful, lightweight programming language
 brew "lua"
 # Just-In-Time Compiler (JIT) for the Lua programming language
-brew "luajit", args: ["HEAD"]
-# CLI for Node.js style checker and lint tool for Markdown files
-brew "markdownlint-cli"
+brew "luajit"
 # Mac App Store command-line interface
 brew "mas"
-# Simple tool to make locally trusted development certificates
-brew "mkcert"
-# 'traceroute' and 'ping' in a single tool
-brew "mtr"
 # Open source relational database management system
 brew "mysql"
 # Node version management
 brew "n"
 # Fast, highly customisable system info script
 brew "neofetch"
-# Small build system for use with gyp or CMake
-brew "ninja"
 # Fast, disk space efficient package manager
 brew "pnpm"
-# PDF rendering library (based on the xpdf-3.0 code base)
-brew "poppler"
-# Wrapper to colorize and simplify ping's output
-brew "prettyping"
 # Python version management
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
-# Perl-powered file rename script with many helpful built-ins
-brew "rename"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
-# Safe, concurrent, practical language
-brew "rust"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Opinionated Lua code formatter
 brew "stylua"
-# User interface to the TELNET protocol
-brew "telnet"
-# Program that allows you to count code, quickly
-brew "tokei"
 # CLI tool that moves files or folder to the trash
 brew "trash"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Command-line unarchiving tools supporting multiple formats
-brew "unar"
 # Command-line interface for Vercel
 brew "vercel-cli"
-# Internet file retriever
-brew "wget"
 # Show the current WiFi network password
 brew "wifi-password"
 # Copy terminal output to clipboard
 brew "yank"
-# Blazing fast terminal file manager written in Rust, based on async I/O
-brew "yazi"
-# Download YouTube videos from the command-line
-brew "youtube-dl"
-# Process YAML, JSON, XML, CSV and properties documents from the CLI
-brew "yq"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Next-generation plugin manager for zsh
 brew "zplug"
 # UNIX shell (command interpreter)
 brew "zsh"
-# AI on the command line
-brew "charmbracelet/tap/mods"
-# 🗑️ cleanup script for macos
-brew "fwartner/tap/mac-cleanup"
 # Sentry command-line client for some generic tasks
 brew "getsentry/tools/sentry-cli"
-# fast and interactive tldr client written with go
-brew "isacikgoz/taps/tldr"
 # A simple terminal UI for git commands, written in Go
 brew "jesseduffield/lazygit/lazygit"
 # A CLI tool to build for the Shopify platform
 brew "shopify/shopify/shopify-cli"
-# Automatic tiling window manager similar to xmonad
-cask "amethyst"
 # Voice and text chat software
 cask "discord"
 # Collaborative team software
 cask "figma"
 # Web browser
-cask "firefox"
-# Web browser with developer tools
-cask "firefox-developer-edition"
-# Client for the Google Drive storage service
-cask "google-drive"
+cask "google-chrome"
 # GraphQL IDE for better development workflows
 cask "graphql-playground"
 # Tool to optimise images to a smaller size
@@ -194,24 +119,36 @@ cask "kap"
 cask "ngrok"
 # App to write, plan, collaborate, and get organised
 cask "notion"
-# Collaboration platform for API development
-cask "postman"
-# Control your tools with a few keystrokes
-cask "raycast"
 # Font manager that helps preview, install, sync and manage fonts
 cask "rightfont"
+# Video chat, voice call and instant messaging application
+cask "skype"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
-# Native desktop client for WhatsApp
-cask "whatsapp"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "Bitwarden", id: 1352778147
+mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Xcode", id: 497799835
+mas "‎WhatsApp", id: 310633997
+vscode "dbaeumer.vscode-eslint"
+vscode "donjayamanne.githistory"
+vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-close-tag"
+vscode "formulahendry.auto-rename-tag"
+vscode "ionutvmi.path-autocomplete"
+vscode "janisdd.vscode-edit-csv"
+vscode "mquandalle.graphql"
+vscode "tonka3000.raycast"
+vscode "unifiedjs.vscode-mdx"
+vscode "waderyan.gitblame"
+vscode "xyc.vscode-mdx-preview"

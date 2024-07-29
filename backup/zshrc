@@ -13,7 +13,7 @@ setopt correct
 # Turn on 256color support
 TERM=xterm-256color
 
-# # Antigen
+# Antigen
 source $(brew --prefix)/share/antigen/antigen.zsh
 antigen init ~/.antigenrc
 
@@ -52,6 +52,3 @@ esac
 
 # bun completions
 [ -s "/Users/matinechabrier/.bun/_bun" ] && source "/Users/matinechabrier/.bun/_bun"
-
-# Add vscode to path
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
