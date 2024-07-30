@@ -13,6 +13,9 @@ ln -s ~/dotfiles/backup/.zprofile ~/.zprofile
 ln -s ~/dotfiles/backup/.antigenrc ~/.antigenrc
 ln -s ~/dotfiles/backup/.Brewfile ~/.Brewfile
 
+exho "Refreshing shell..."
+source ~/.zshrc
+
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -26,5 +29,10 @@ rm ~/.zprofile
 rm ~/.antigenrc
 rm ~/.Brewfile
 
-echo "Initial setup complete"
+echo "Symlinking backup folder with stow..."
+cd ~/dotfiles/backup
+stow . -t ~/
+cd ~/dotfiles
+
+echo "Initial setup complete."
 echo "Close this terminal, open Wezterm and run the rest of the installation '~/dotfiles/scripts/install.sh'"
