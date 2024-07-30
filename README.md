@@ -15,31 +15,35 @@ brew bundle dump --force --file=~/dotfiles/backup/homebrew/Brewfile --describe
 1. [Generate a new public and private SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) by running:
 
 ```bash
-curl https://raw.githubusercontent.com/driesvints/dotfiles/HEAD/ssh.sh | sh -s "<your-email-address>"
+curl https://raw.githubusercontent.com/driesvints/dotfiles/HEAD/ssh.sh | sh -s "matine.chabrier@gmail.com"
 ```
 
-2. Clone the repository directly in your home folder:
+2. Add your public key to your github account.
+
+3. Clone the repository directly in your home folder:
 
 ```bash
 git clone https://github.com/matine/dotfiles ~/dotfiles
 ```
 
-3. Navigate to the `dotfiles` directory:
+4. Navigate to the `dotfiles` directory:
 
 ```bash
 cd ~/dotfiles
 ```
 
-4. Run the setup script
+5. Note that the homebrew path is different for Intel and Silicon machines, so you will need to ensure the correct one is set in the .zshenv file.
+
+6. Run the setup script
 
 ```bash
 ./setup.sh
 ```
 
-5. Open the menu
+7. Open the menu (optional)
 
 ```bash
-sh $DOTFILES/scripts/menu.sh
+sh ~/dotfiles/scripts/menu.sh
 ```
 
 ## Features

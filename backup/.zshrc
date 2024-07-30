@@ -14,7 +14,7 @@ setopt correct
 TERM=xterm-256color
 
 # Antigen
-source $(brew --prefix)/share/antigen/antigen.zsh
+source $HOMEBREW/share/antigen/antigen.zsh
 antigen init ~/.antigenrc
 
 # ZSH
@@ -29,7 +29,6 @@ eval "$(starship init zsh)"
 eval "$(pyenv init --path)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 # Make all bins executable
 chmod +x $DOTFILES/bin/*
