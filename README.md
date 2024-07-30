@@ -36,6 +36,12 @@ cd ~/dotfiles
 ./setup.sh
 ```
 
+5. Open the menu
+
+```bash
+sh $DOTFILES/scripts/menu.sh
+```
+
 ## Features
 
 - Setup the shell (zsh)
