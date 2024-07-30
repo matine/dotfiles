@@ -18,7 +18,11 @@ brew bundle dump --force --file=~/dotfiles/backup/homebrew/Brewfile --describe
 curl https://raw.githubusercontent.com/driesvints/dotfiles/HEAD/ssh.sh | sh -s "matine.chabrier@gmail.com"
 ```
 
-2. Add your public key to your github account.
+2. Copy your public key to your github account
+
+```bash
+pbcopy < ~/.ssh/id_ed25519.pub
+```
 
 3. Clone the repository directly in your home folder:
 
