@@ -21,3 +21,7 @@ alias nt="npm test"
 alias bi="brew install"
 alias bu="brew uninstall"
 alias bup="brew upgrade"
+
+# Remap ls to eza
+alias ls="eza --hyperlink"
+alias ls-p="eza --absolute=on"

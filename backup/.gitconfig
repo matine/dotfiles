@@ -12,3 +12,24 @@
 	excludesfile = ~/.gitignore
 [init]
 	defaultBranch = main
+[alias]
+	gl = config --global -l
+	ch = checkout
+	chn = checkout -b
+	pl = pull
+	p = push
+	po = push -u origin
+	a = add -A
+	cm = commit -m
+	m = merge
+	sh = stash
+	shc = stash clear
+	l = log
+	ll = log --oneline
+	last = log -1 HEAD --stat
+	rv = remote -v
+	d = diff
+	dv = difftool -t vimdiff -y
+	set = remote set-url origin
+	rm = rm -r
+	st = status -sb

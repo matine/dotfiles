@@ -35,4 +35,4 @@ stow . -t ~/
 cd ~/dotfiles
 
 echo "Initial setup complete."
-echo "Close this terminal, open Wezterm and run the rest of the installation '~/dotfiles/scripts/install.sh'"
+echo "Close this terminal, open Wezterm and run the rest of the installation '~/dotfiles/scripts/install-all.sh'"
