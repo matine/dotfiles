@@ -59,7 +59,7 @@ git remote set-url origin git@github.com:matine/dotfiles
 ## Features
 
 - Setup the shell (zsh)
-- Setup the GIT
+- Setup GIT
 - Install homebrew and packages
 - Install global (P)NPM packages
 - Configure MacOS

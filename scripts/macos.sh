@@ -105,7 +105,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 chirp --info "Set a blazingly fast keyboard repeat rate"
 defaults write NSGlobalDomain KeyRepeat -int 3
-defaults write NSGlobalDomain InitialKeyRepeat -int 50
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 chirp --info "Set language and text formats"
 # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
@@ -199,9 +199,6 @@ defaults write com.apple.finder ShowStatusBar -bool true
 
 chirp --info "Finder: show path bar"
 defaults write com.apple.finder ShowPathbar -bool true
-
-chirp --info "Display full POSIX path as Finder window title"
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 chirp --info "Keep folders on top when sorting by name"
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
