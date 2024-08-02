@@ -1,5 +1,5 @@
 # Show this file
-alias a="bat $DOTFILES/shell/alias.zsh"
+alias alias="bat $DOTFILES/shell/alias.zsh"
 
 # Shell and PATH helpers
 alias path="echo $PATH | tr ':' '\n'"
@@ -21,6 +21,7 @@ alias nt="npm test"
 alias bi="brew install"
 alias bu="brew uninstall"
 alias bup="brew upgrade"
+alias bfile="brew bundle dump --force --file=$DOTFILES/backup/.Brewfile --describe"
 
 # Remap ls to eza
 alias ls="eza --hyperlink"

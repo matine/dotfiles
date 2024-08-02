@@ -7,7 +7,7 @@ TODO: Automate this process
 1. Dump your current installed apps status as a brewfile (Warning: this will overwrite the old one)
 
 ```bash
-brew bundle dump --force --file=~/dotfiles/backup/.Brewfile --describe
+bfile
 ```
 
 ## Installation

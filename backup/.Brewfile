@@ -117,10 +117,14 @@ cask "graphql-playground"
 cask "imageoptim"
 # Open-source screen recorder built with web technology
 cask "kap"
+# Keyboard customiser
+cask "karabiner-elements"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # App to write, plan, collaborate, and get organised
 cask "notion"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Font manager that helps preview, install, sync and manage fonts
 cask "rightfont"
 # Video chat, voice call and instant messaging application
@@ -150,6 +154,7 @@ vscode "formulahendry.auto-rename-tag"
 vscode "ionutvmi.path-autocomplete"
 vscode "janisdd.vscode-edit-csv"
 vscode "mquandalle.graphql"
+vscode "silvenon.mdx"
 vscode "tonka3000.raycast"
 vscode "unifiedjs.vscode-mdx"
 vscode "waderyan.gitblame"
