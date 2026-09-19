@@ -56,6 +56,52 @@ sh ./menu.sh
 git remote set-url origin git@github.com:matine/dotfiles
 ```
 
+9. Create your machine-local secrets file — see [Secrets](#secrets) below. Nothing in
+   this repo contains credentials, so tokens will be missing until you do this.
+
+## Secrets
+
+Credentials are **never** stored in this repo. They live in `~/.zshrc.local`, which
+sits outside `~/dotfiles` so that `git add` in this repo cannot pick it up. `~/.zshrc`
+sources it at the end of the file:
+
+```bash
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+```
+
+`.zshrc.local` is also listed in the global git excludes (`backup/.gitignore`, symlinked
+to `~/.gitignore` via `core.excludesfile`) and in this repo's own `.gitignore`, as a
+safety net in case a copy ever lands inside the repo.
+
+### On a new machine
+
+`~/.zshrc.local` is intentionally **not** created by `initial-setup.sh` — there is nothing
+to copy, because the values are not in this repo. Create it by hand after cloning:
+
+```bash
+touch ~/.zshrc.local && chmod 600 ~/.zshrc.local
+```
+
+Then add the exports you need, for example:
+
+```bash
+export ANTHROPIC_API_KEY='...'
+export NPM_TOKEN='...'
+export CLOUDSMITH_TOKEN='...'
+```
+
+Retrieve the current values from your password manager, not from another machine's
+shell history. Keep the file at mode `600`.
+
+### Adding a new credential
+
+Put the `export` in `~/.zshrc.local`. Never in `backup/.zshrc`, `shell/exports.zsh`, or
+any other tracked file. If you are unsure whether something is tracked:
+
+```bash
+cd ~/dotfiles && git check-ignore -v <path> || git ls-files --error-unmatch <path>
+```
+
 ## Features
 
 - Setup the shell (zsh)
@@ -66,3 +112,5 @@ git remote set-url origin git@github.com:matine/dotfiles
 - Configure Karabiner
 - Configure VSCode
 - Configure Wezterm
+- Configure Herdr
+- Keep credentials out of version control (see [Secrets](#secrets))

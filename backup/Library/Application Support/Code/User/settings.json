@@ -1,12 +1,14 @@
 {
+  "update.mode": "manual",
   "javascript.updateImportsOnFileMove.enabled": "never",
-  "explorer.confirmDragAndDrop": false,
   "typescript.updateImportsOnFileMove.enabled": "never",
+  "explorer.confirmDragAndDrop": false,
   "emmet.includeLanguages": {
-    "javascript": "javascriptreact"
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
   },
   "editor.tabSize": 2,
-  "prettier.singleQuote": true,
+  "prettier.resolveGlobalModules": true,
   "editor.wordWrap": "on",
   "eslint.probe": [
     "javascript",
@@ -24,22 +26,25 @@
     "html",
     "typescriptreact"
   ],
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "[javascriptreact]": {
-    "editor.formatOnSave": false
-  },
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "[python]": {
-    "editor.formatOnType": true
-  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.inlineSuggest.enabled": true,
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.formatOnSave": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.codeActionsOnSave.rules": null,
   "auto-rename-tag.activationOnLanguage": ["html", "xml", "php", "javascript"],
-  "explorer.confirmDelete": false
+  "explorer.confirmDelete": false,
+  "workbench.editorAssociations": {
+    "*.gz": "default",
+    "**/cheatsheet.md": "vscode.markdown.preview.editor"
+  },
+  "files.associations": {
+    "*.ndjson": "json"
+  },
+  "terminal.integrated.mouseWheelScrollSensitivity": 3,
+  "terminal.integrated.gpuAcceleration": "off",
+  "window.autoDetectColorScheme": false,
+  "claudeCode.preferredLocation": "panel"
 }

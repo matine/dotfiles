@@ -1,2 +1,16 @@
 .DS_Store
 npm-debug.log
+
+**/.claude/settings.local.json
+
+# Machine-local shell secrets (see dotfiles README > Secrets)
+.zshrc.local
+
+**/.claude/.cc-writes/
+
+# Herdr writes logs, sockets and live session state next to its config
+**/.config/herdr/*.log
+**/.config/herdr/*.sock
+**/.config/herdr/session.json
+**/.config/herdr/release-notes.json
+**/.config/herdr/.plugins.lock

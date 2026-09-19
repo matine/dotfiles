@@ -31,7 +31,7 @@ rm ~/.Brewfile
 
 echo "Symlinking backup folder with stow..."
 cd ~/dotfiles/backup
-stow . -t ~/
+stow . -t ~/ --no-folding
 cd ~/dotfiles
 
 echo "Initial setup complete."

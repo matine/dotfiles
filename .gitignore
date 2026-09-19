@@ -1,0 +1,6 @@
+
+# Machine-local secrets. The real file lives at ~/.zshrc.local (outside this
+# repo); these patterns are a safety net in case a copy ever lands in here.
+.zshrc.local
+**/.zshrc.local
+*.local.zsh

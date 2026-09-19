@@ -5,6 +5,9 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_TAB_TITLE_CONCAT_FOLDER_PROCESS=true
 DISABLE_AUTO_TITLE="true"
 
+export N_PREFIX="$HOME/.n"
+export PATH="$N_PREFIX/bin:$PATH"
+
 # Case insensitve autocomplete
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # Turn on correction suggestions
@@ -51,3 +54,10 @@ esac
 
 # bun completions
 [ -s "/Users/matinechabrier/.bun/_bun" ] && source "/Users/matinechabrier/.bun/_bun"
+
+# ================================================================================ #
+# Machine-local overrides and secrets (untracked)
+# ================================================================================ #
+# Credentials live in ~/.zshrc.local, which is deliberately outside this repo so
+# it cannot be committed by accident. See README.md > Secrets.
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

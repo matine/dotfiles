@@ -1,0 +1,48 @@
+{
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true
+  },
+  "theme": "dark",
+
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": ["~/dotfiles"],
+    "deny": [
+      "Edit(~/dotfiles/**/.claude/settings.json)",
+      "Edit(~/dotfiles/**/.claude/settings.local.json)"
+    ]
+  },
+
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": true,
+    "filesystem": {
+      "denyRead": ["~/"],
+      "allowRead": ["~/ClaudeAccess", "~/dotfiles", "~/.config/herdr"],
+      "allowWrite": [
+        "~/ClaudeAccess",
+        "~/dotfiles",
+        "~/.config/herdr/herdr.sock"
+      ]
+    },
+    "network": {
+      "allowUnixSockets": ["/Users/matinechabrier/.config/herdr/herdr.sock"]
+    }
+  },
+
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/matinechabrier/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

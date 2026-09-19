@@ -35,3 +35,9 @@
 	set = remote set-url origin
 	rm = rm -r
 	st = status -sb
+	mn = checkout main
+	dv = checkout develop
+	del = branch -D
+	b = branch
+	delalldry = !git branch | grep -v \"develop\\|main\"
+	delall = !git branch | grep -v \"develop\\|main\" | xargs git branch -D
