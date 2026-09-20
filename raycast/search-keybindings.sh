@@ -8,10 +8,10 @@
 # Optional parameters:
 # @raycast.icon ⌨️
 # @raycast.packageName Dotfiles
-# @raycast.argument1 { "type": "text", "placeholder": "lg push, vm send, split…", "optional": true }
+# @raycast.argument1 { "type": "text", "placeholder": "hr, lg, vm, rc", "optional": true }
 
 # Documentation:
-# @raycast.description Fuzzy-search cheatsheet.md for a keybinding or alias. Section shorthands: lg = lazygit, vm = neovim, rc = raycast. Leave the argument empty to list everything.
+# @raycast.description Fuzzy-search cheatsheet.md for a keybinding or alias. Section shorthands: lg = lazygit, vm = neovim, rc = raycast, hr = herdr. Leave the argument empty to list everything.
 # @raycast.author Matine Chabrier
 
 # Raycast runs this with a bare PATH and none of the zsh dotfiles, so $DOTFILES

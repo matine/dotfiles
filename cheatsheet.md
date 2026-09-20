@@ -7,7 +7,7 @@ Every keybinding and alias defined in this repo, grouped by tool.
 > exception: they are hand-written and preserved across runs.
 
 Search it with `keys <terms>` or the Raycast "Search keybindings" command.
-Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast — so
+Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr — so
 `keys lg push` narrows to one section.
 
 ## Contents
@@ -18,6 +18,7 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast — so
 - [Karabiner](#karabiner) (3 entries)
 - [Neovim](#neovim) (20 entries)
 - [WezTerm](#wezterm) (13 entries)
+- [Herdr](#herdr) (13 entries)
 - [VS Code](#vs-code) (1 entries)
 - [Lazygit](#lazygit) (manual)
 - [Raycast](#raycast) (manual)
@@ -148,6 +149,26 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast — so
 | `LEADER+UpArrow` | `AdjustPaneSize { "Up", 5 }` | `backup/.config/wezterm/wezterm.lua` |
 
 > **Note:** `LEADER` in the table above means press `CTRL+a` first.
+
+## Herdr
+
+| Key / Alias | What it does | Source |
+| --- | --- | --- |
+| `` ctrl+` `` | **Prefix** leader for the `prefix+…` bindings below — Backtick has no ASCII control code, so this relies on the Kitty keyboard protocol. Ghostty enables it by default; WezTerm 20240203 does not. | `backup/.config/herdr/config.toml` |
+| `prefix+h` / `ctrl+alt+h` | Focus pane left | `backup/.config/herdr/config.toml` |
+| `prefix+j` / `ctrl+alt+j` | Focus pane down | `backup/.config/herdr/config.toml` |
+| `prefix+k` / `ctrl+alt+k` | Focus pane up | `backup/.config/herdr/config.toml` |
+| `prefix+l` / `ctrl+alt+l` | Focus pane right | `backup/.config/herdr/config.toml` |
+| `prefix+p` / `ctrl+alt+p` | Previous tab | `backup/.config/herdr/config.toml` |
+| `prefix+n` / `ctrl+alt+n` | Next tab | `backup/.config/herdr/config.toml` |
+| `prefix+c` / `ctrl+alt+c` | New tab | `backup/.config/herdr/config.toml` |
+| `prefix+v` / `ctrl+alt+d` | Split vertical | `backup/.config/herdr/config.toml` |
+| `prefix+minus` / `ctrl+alt+shift+d` | Split horizontal | `backup/.config/herdr/config.toml` |
+| `prefix+z` / `ctrl+alt+z` | Zoom | `backup/.config/herdr/config.toml` |
+| `prefix+tab` / `ctrl+alt+t` | Cycle pane next | `backup/.config/herdr/config.toml` |
+| `prefix+shift+tab` / `ctrl+alt+shift+t` | Cycle pane previous | `backup/.config/herdr/config.toml` |
+
+> **Note:** `prefix` in the table above means press `` ctrl+` `` first.
 
 ## VS Code
 

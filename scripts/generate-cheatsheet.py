@@ -584,6 +584,79 @@ def parse_wezterm(path):
     return Section("WezTerm", "wezterm", rows, notes)
 
 
+TOML_TABLE_RE = re.compile(r"^\[([^\]]+)\]\s*$")
+TOML_STR_RE = re.compile(r'"((?:\\.|[^"\\])*)"')
+
+
+def parse_herdr(path):
+    """The [keys] table of Herdr's config.toml. Each action binds a list of
+    chords -- a prefixed one and a direct one -- so both land in the Key column.
+    Comments are read like the zsh aliases: one that describes a single binding
+    becomes its description, group comments stay out of the table."""
+    text = read(path)
+    if text is None:
+        return None
+
+    entries = []  # (action, [chords], comment, comment_id)
+    in_keys = False
+    comment = None
+    comment_id = 0
+    for line in text.splitlines():
+        stripped = line.strip()
+        table = TOML_TABLE_RE.match(stripped)
+        if table:
+            in_keys = table.group(1).strip() == "keys"
+            comment = None
+            continue
+        if stripped.startswith("#"):
+            # A comment block spanning several lines is still one comment.
+            if comment is None:
+                comment_id += 1
+                comment = stripped.lstrip("#").strip()
+            else:
+                comment += " " + stripped.lstrip("#").strip()
+            continue
+        if not stripped:
+            comment = None
+            continue
+        if not in_keys or "=" not in stripped:
+            comment = None
+            continue
+        action, raw = stripped.split("=", 1)
+        raw = raw.strip()
+        chords = TOML_STR_RE.findall(raw) if raw.startswith("[") else [unquote(raw)]
+        entries.append((action.strip(), chords, comment, comment_id))
+        comment = None
+
+    if not entries:
+        return None
+
+    shared = {}
+    for _, _, _, cid in entries:
+        shared[cid] = shared.get(cid, 0) + 1
+
+    source = code(rel(path))
+    rows = []
+    notes = []
+    prefix = None
+    for action, chords, comment, cid in entries:
+        keys = " / ".join(code(chord) for chord in chords)
+        if action == "prefix":
+            prefix = chords[0] if chords else None
+            what = "**Prefix** leader for the `prefix+…` bindings below"
+        else:
+            what = action.replace("_", " ").capitalize()
+        if comment and shared.get(cid) == 1:
+            what += " — " + cell(comment)
+        rows.append((keys, what, source))
+
+    if prefix:
+        notes.append(
+            "`prefix` in the table above means press {} first.".format(code(prefix))
+        )
+    return Section("Herdr", "herdr", rows, notes)
+
+
 def parse_vscode(path):
     text = read(path)
     if text is None:
@@ -626,7 +699,7 @@ def render(sections, manual_bodies):
         "> exception: they are hand-written and preserved across runs.",
         "",
         "Search it with `keys <terms>` or the Raycast \"Search keybindings\" command.",
-        "Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast — so",
+        "Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr — so",
         "`keys lg push` narrows to one section.",
         "",
     ]
@@ -701,6 +774,7 @@ def main():
         ),
         ("neovim", lambda: parse_nvim(backup / ".config" / "nvim")),
         ("wezterm", lambda: parse_wezterm(backup / ".config" / "wezterm" / "wezterm.lua")),
+        ("herdr", lambda: parse_herdr(backup / ".config" / "herdr" / "config.toml")),
         (
             "vs code",
             lambda: parse_vscode(
