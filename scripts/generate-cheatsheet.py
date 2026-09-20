@@ -154,15 +154,75 @@ def code(text):
 LUA_STR = r"([\"'])((?:\\.|(?!\1).)*)\1"
 
 
+def mask_lua(text, strings=True):
+    """Blank out Lua comments, and optionally string bodies, preserving length.
+
+    Indices into the result line up with the original, so callers can scan the
+    masked copy for structure and then slice the original. Without this, an
+    apostrophe in a comment reads as an unterminated string and swallows the
+    rest of the file.
+    """
+    out = list(text)
+    n = len(text)
+
+    def blank(start, end):
+        for j in range(start, min(end, n)):
+            if out[j] != "\n":
+                out[j] = " "
+
+    def long_bracket(idx):
+        """Level of a [[ or [=[ long bracket opening at idx, or None."""
+        if idx >= n or text[idx] != "[":
+            return None
+        j = idx + 1
+        while j < n and text[j] == "=":
+            j += 1
+        return j - idx - 1 if j < n and text[j] == "[" else None
+
+    i = 0
+    while i < n:
+        if text.startswith("--", i):
+            level = long_bracket(i + 2)
+            if level is None:
+                end = text.find("\n", i)
+                end = n if end == -1 else end
+            else:
+                close = text.find("]" + "=" * level + "]", i + level + 4)
+                end = n if close == -1 else close + level + 2
+            blank(i, end)
+            i = end
+            continue
+        level = long_bracket(i)
+        if level is not None:
+            close = text.find("]" + "=" * level + "]", i + level + 2)
+            end = n if close == -1 else close + level + 2
+            if strings:
+                blank(i, end)
+            i = end
+            continue
+        if text[i] in "\"'":
+            quote = text[i]
+            j = i + 1
+            while j < n and text[j] != quote and text[j] != "\n":
+                j += 2 if text[j] == "\\" else 1
+            end = min(j + 1, n)
+            if strings:
+                blank(i, end)
+            i = end
+            continue
+        i += 1
+    return "".join(out)
+
+
 def lua_field(text, name):
     """Value of `name = "..."` (or '...') in a Lua table body, or None."""
-    found = re.search(r"\b" + name + r"\s*=\s*" + LUA_STR, text)
+    found = re.search(r"\b" + name + r"\s*=\s*" + LUA_STR, mask_lua(text, strings=False))
     return found.group(2) if found else None
 
 
 def first_lua_string(text):
     """The first quoted string in a Lua table body, or None."""
-    found = re.search(LUA_STR, text)
+    found = re.search(LUA_STR, mask_lua(text, strings=False))
     return found.group(2) if found else None
 
 
@@ -174,40 +234,30 @@ def unquote(text):
     return text
 
 
-def match_brace(text, open_idx):
-    """Index of the brace closing the one at open_idx, ignoring quoted braces."""
+def match_brace(text, open_idx, masked=None):
+    """Index of the brace closing the one at open_idx, ignoring strings and comments."""
+    scan = mask_lua(text) if masked is None else masked
     depth = 0
-    quote = None
-    i = open_idx
-    while i < len(text):
-        ch = text[i]
-        if quote:
-            if ch == "\\":
-                i += 2
-                continue
-            if ch == quote:
-                quote = None
-        elif ch in "\"'":
-            quote = ch
-        elif ch == "{":
+    for i in range(open_idx, len(scan)):
+        if scan[i] == "{":
             depth += 1
-        elif ch == "}":
+        elif scan[i] == "}":
             depth -= 1
             if depth == 0:
                 return i
-        i += 1
     return -1
 
 
 def block_after(text, pattern):
     """Inner text of the { ... } table following a regex match, or None."""
-    found = re.search(pattern, text)
+    masked = mask_lua(text)
+    found = re.search(pattern, masked)
     if not found:
         return None
-    open_idx = text.find("{", found.end() - 1)
+    open_idx = masked.find("{", found.end() - 1)
     if open_idx == -1:
         return None
-    close_idx = match_brace(text, open_idx)
+    close_idx = match_brace(text, open_idx, masked)
     if close_idx == -1:
         return None
     return text[open_idx + 1 : close_idx]
@@ -216,10 +266,11 @@ def block_after(text, pattern):
 def top_level_tables(inner):
     """Split a Lua table body into its top-level { ... } entries."""
     entries = []
+    masked = mask_lua(inner)
     i = 0
     while i < len(inner):
-        if inner[i] == "{":
-            close = match_brace(inner, i)
+        if masked[i] == "{":
+            close = match_brace(inner, i, masked)
             if close == -1:
                 break
             entries.append(inner[i : close + 1])
@@ -466,7 +517,7 @@ def parse_karabiner(path):
 
 
 def _lua_modes(entry):
-    found = re.search(r"mode\s*=\s*\{([^}]*)\}", entry)
+    found = re.search(r"mode\s*=\s*\{([^}]*)\}", mask_lua(entry, strings=False))
     if found:
         modes = [m[1] for m in re.findall(LUA_STR, found.group(1))]
         return ",".join(modes) if modes else "n"

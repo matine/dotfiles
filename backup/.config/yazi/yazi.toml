@@ -1,0 +1,12 @@
+#:schema https://yazi-rs.github.io/schemas/yazi.json
+
+[mgr]
+# Show dotfiles by default. Toggle at runtime with `.`
+show_hidden = true
+
+[opener]
+# Default is `${EDITOR:-vi} %s`, and EDITOR is `code` (shell/exports.zsh),
+# which sent Enter to VSCode. Pin nvim here instead of changing EDITOR globally.
+edit = [
+	{ run = 'nvim %s', desc = "nvim", block = true, for = "unix" },
+]

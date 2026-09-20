@@ -1,13 +1,7 @@
 return {
   "folke/snacks.nvim",
   opts = {
-    picker = {
-      sources = {
-        explorer = {
-          hidden = true,
-          ignored = true,
-        },
-      },
-    },
+    -- Yazi takes the startup screen instead; see lua/plugins/yazi.lua.
+    dashboard = { enabled = false },
   },
 }

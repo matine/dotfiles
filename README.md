@@ -113,4 +113,5 @@ cd ~/dotfiles && git check-ignore -v <path> || git ls-files --error-unmatch <pat
 - Configure VSCode
 - Configure Wezterm
 - Configure Herdr
+- Configure Yazi
 - Keep credentials out of version control (see [Secrets](#secrets))

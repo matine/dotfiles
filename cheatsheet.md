@@ -16,7 +16,7 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr 
 - [Shell functions](#shell-functions) (2 entries)
 - [Git aliases](#git-aliases) (27 entries)
 - [Karabiner](#karabiner) (3 entries)
-- [Neovim](#neovim) (20 entries)
+- [Neovim](#neovim) (23 entries)
 - [WezTerm](#wezterm) (13 entries)
 - [Herdr](#herdr) (22 entries)
 - [VS Code](#vs-code) (1 entries)
@@ -125,6 +125,9 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr 
 | `<c-a-j>` | Resize down — mrjones2014/smart-splits.nvim _(mode: n,t,x)_ | `backup/.config/nvim/lua/plugins/tmux.lua` |
 | `<c-a-k>` | Resize up — mrjones2014/smart-splits.nvim _(mode: n,t,x)_ | `backup/.config/nvim/lua/plugins/tmux.lua` |
 | `<c-a-l>` | Resize right — mrjones2014/smart-splits.nvim _(mode: n,t,x)_ | `backup/.config/nvim/lua/plugins/tmux.lua` |
+| `<leader>-` | Open yazi at the current file — mikavilpas/yazi.nvim _(mode: n,v)_ | `backup/.config/nvim/lua/plugins/yazi.lua` |
+| `<leader>e` | Open yazi in nvim's working directory — mikavilpas/yazi.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/yazi.lua` |
+| `<c-up>` | Resume the last yazi session — mikavilpas/yazi.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/yazi.lua` |
 
 > **Note:** `backup/.config/nvim/lua/plugins/example.lua` is disabled by an `if true then return {} end` guard, so its keymaps never load and are excluded.
 
