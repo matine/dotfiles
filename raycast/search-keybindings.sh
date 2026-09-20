@@ -11,7 +11,7 @@
 # @raycast.argument1 { "type": "text", "placeholder": "hr, lg, vm, rc", "optional": true }
 
 # Documentation:
-# @raycast.description Fuzzy-search cheatsheet.md for a keybinding or alias. Section shorthands: lg = lazygit, vm = neovim, rc = raycast, hr = herdr. Leave the argument empty to list everything.
+# @raycast.description Fuzzy-search cheatsheet.md for a keybinding or alias. Section shorthands show that section alone: lg = lazygit, vm = neovim, rc = raycast, hr = herdr — add a sub-section to narrow further, like "hr tab". Leave the argument empty to list everything.
 # @raycast.author Matine Chabrier
 
 # Raycast runs this with a bare PATH and none of the zsh dotfiles, so $DOTFILES

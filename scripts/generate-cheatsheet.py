@@ -107,9 +107,20 @@ def manual_markers(key):
 
 
 class Section:
-    def __init__(self, title, anchor, rows=None, notes=None):
+    """One tool's worth of the cheatsheet.
+
+    Pass `groups` -- a list of (subtitle, rows) -- to split the section into
+    `###` sub-tables, the way the hand-written Lazygit section is laid out.
+    `rows` then falls out of the groups, so the Contents count stays right and
+    anything reading the flat list keeps working.
+    """
+
+    def __init__(self, title, anchor, rows=None, notes=None, groups=None):
         self.title = title
         self.anchor = anchor
+        self.groups = groups or []
+        if rows is None and self.groups:
+            rows = [row for _, group in self.groups for row in group]
         self.rows = rows or []
         self.notes = notes or []
 
@@ -584,6 +595,29 @@ def parse_wezterm(path):
     return Section("WezTerm", "wezterm", rows, notes)
 
 
+# Herdr names its actions after what they touch, so the sub-heading each
+# binding belongs under can be read straight off the action. First match wins,
+# and anything unclaimed -- the prefix leader, `help`, and any action added
+# later that fits none of them -- falls through to Global.
+#
+# Widest container first, so an action naming two of them lands under the outer
+# one: a hypothetical move_pane_to_workspace is a workspace command.
+HERDR_GROUPS = [
+    ("Workspaces", ("workspace",)),
+    ("Tabs", ("tab",)),
+    ("Panes", ("pane", "split", "zoom")),
+]
+# Containment order: a workspace holds tabs, a tab holds panes.
+HERDR_ORDER = ["Global", "Workspaces", "Tabs", "Panes"]
+
+
+def herdr_group(action):
+    for title, needles in HERDR_GROUPS:
+        if any(needle in action for needle in needles):
+            return title
+    return "Global"
+
+
 TOML_TABLE_RE = re.compile(r"^\[([^\]]+)\]\s*$")
 TOML_STR_RE = re.compile(r'"((?:\\.|[^"\\])*)"')
 
@@ -636,7 +670,7 @@ def parse_herdr(path):
         shared[cid] = shared.get(cid, 0) + 1
 
     source = code(rel(path))
-    rows = []
+    grouped = {}
     notes = []
     prefix = None
     for action, chords, comment, cid in entries:
@@ -648,13 +682,17 @@ def parse_herdr(path):
             what = action.replace("_", " ").capitalize()
         if comment and shared.get(cid) == 1:
             what += " — " + cell(comment)
-        rows.append((keys, what, source))
+        grouped.setdefault(herdr_group(action), []).append((keys, what, source))
+
+    # Config order within a group, HERDR_ORDER between them, and an empty group
+    # is simply left out rather than printed as a bare heading.
+    groups = [(title, grouped[title]) for title in HERDR_ORDER if title in grouped]
 
     if prefix:
         notes.append(
-            "`prefix` in the table above means press {} first.".format(code(prefix))
+            "`prefix` in the tables above means press {} first.".format(code(prefix))
         )
-    return Section("Herdr", "herdr", rows, notes)
+    return Section("Herdr", "herdr", None, notes, groups)
 
 
 def parse_vscode(path):
@@ -716,8 +754,12 @@ def render(sections, manual_bodies):
     for section in sections:
         out.append("## " + section.title)
         out.append("")
-        out += render_table(section.rows)
-        out.append("")
+        for subtitle, rows in section.groups or [(None, section.rows)]:
+            if subtitle:
+                out.append("### " + subtitle)
+                out.append("")
+            out += render_table(rows)
+            out.append("")
         for note in section.notes:
             out.append("> **Note:** " + note)
             out.append("")

@@ -18,7 +18,7 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr 
 - [Karabiner](#karabiner) (3 entries)
 - [Neovim](#neovim) (20 entries)
 - [WezTerm](#wezterm) (13 entries)
-- [Herdr](#herdr) (13 entries)
+- [Herdr](#herdr) (14 entries)
 - [VS Code](#vs-code) (1 entries)
 - [Lazygit](#lazygit) (manual)
 - [Raycast](#raycast) (manual)
@@ -152,23 +152,41 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr 
 
 ## Herdr
 
+### Global
+
 | Key / Alias | What it does | Source |
 | --- | --- | --- |
 | `` ctrl+` `` | **Prefix** leader for the `prefix+…` bindings below — Backtick has no ASCII control code, so this relies on the Kitty keyboard protocol. Ghostty enables it by default; WezTerm 20240203 does not. | `backup/.config/herdr/config.toml` |
-| `prefix+h` / `ctrl+alt+h` | Focus pane left | `backup/.config/herdr/config.toml` |
-| `prefix+j` / `ctrl+alt+j` | Focus pane down | `backup/.config/herdr/config.toml` |
-| `prefix+k` / `ctrl+alt+k` | Focus pane up | `backup/.config/herdr/config.toml` |
-| `prefix+l` / `ctrl+alt+l` | Focus pane right | `backup/.config/herdr/config.toml` |
-| `prefix+p` / `ctrl+alt+p` | Previous tab | `backup/.config/herdr/config.toml` |
-| `prefix+n` / `ctrl+alt+n` | Next tab | `backup/.config/herdr/config.toml` |
-| `prefix+c` / `ctrl+alt+c` | New tab | `backup/.config/herdr/config.toml` |
-| `prefix+v` / `ctrl+alt+d` | Split vertical | `backup/.config/herdr/config.toml` |
-| `prefix+minus` / `ctrl+alt+shift+d` | Split horizontal | `backup/.config/herdr/config.toml` |
-| `prefix+z` / `ctrl+alt+z` | Zoom | `backup/.config/herdr/config.toml` |
-| `prefix+tab` / `ctrl+alt+t` | Cycle pane next | `backup/.config/herdr/config.toml` |
-| `prefix+shift+tab` / `ctrl+alt+shift+t` | Cycle pane previous | `backup/.config/herdr/config.toml` |
+| `prefix+?` | Help — Herdr's own keybinding overlay, the fastest way to look a chord up in situ. | `backup/.config/herdr/config.toml` |
 
-> **Note:** `prefix` in the table above means press `` ctrl+` `` first.
+### Workspaces
+
+| Key / Alias | What it does | Source |
+| --- | --- | --- |
+| `prefix+w` | Workspace picker — Up and down keys move between workspaces. | `backup/.config/herdr/config.toml` |
+| `prefix+shift+n` | New workspace — prefix+N, since plain prefix+n is the next tab. | `backup/.config/herdr/config.toml` |
+
+### Tabs
+
+| Key / Alias | What it does | Source |
+| --- | --- | --- |
+| `prefix+p` | Previous tab | `backup/.config/herdr/config.toml` |
+| `prefix+n` | Next tab | `backup/.config/herdr/config.toml` |
+| `prefix+c` | New tab | `backup/.config/herdr/config.toml` |
+| `prefix+shift+x` | Close tab | `backup/.config/herdr/config.toml` |
+
+### Panes
+
+| Key / Alias | What it does | Source |
+| --- | --- | --- |
+| `prefix+v` | Split vertical | `backup/.config/herdr/config.toml` |
+| `prefix+minus` | Split horizontal | `backup/.config/herdr/config.toml` |
+| `prefix+z` | Zoom | `backup/.config/herdr/config.toml` |
+| `prefix+tab` / `ctrl+alt+t` | Cycle pane next | `backup/.config/herdr/config.toml` |
+| `prefix+shift+tab` | Cycle pane previous | `backup/.config/herdr/config.toml` |
+| `prefix+x` | Close pane | `backup/.config/herdr/config.toml` |
+
+> **Note:** `prefix` in the tables above means press `` ctrl+` `` first.
 
 ## VS Code
 

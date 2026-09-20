@@ -4,25 +4,27 @@ onboarding = false
 # Backtick has no ASCII control code, so this relies on the Kitty keyboard
 # protocol. Ghostty enables it by default; WezTerm 20240203 does not.
 prefix = "ctrl+`"
-# Each action takes both a prefixed binding and a direct ctrl+alt chord, so
-# pane moves work mid-sentence without the leader. Herdr's vetted prefix-free
-# set: https://herdr.dev/docs/keyboard/
-focus_pane_left = ["prefix+h", "ctrl+alt+h"]
-focus_pane_down = ["prefix+j", "ctrl+alt+j"]
-focus_pane_up = ["prefix+k", "ctrl+alt+k"]
-focus_pane_right = ["prefix+l", "ctrl+alt+l"]
-# ctrl+[ is ASCII ESC and ctrl+] is GS, so terminals emit the legacy byte for
-# them and the chord never arrives. Letters mirror the prefix bindings instead.
-previous_tab = ["prefix+p", "ctrl+alt+p"]
-next_tab = ["prefix+n", "ctrl+alt+n"]
-new_tab = ["prefix+c", "ctrl+alt+c"]
-split_vertical = ["prefix+v", "ctrl+alt+d"]
-split_horizontal = ["prefix+minus", "ctrl+alt+shift+d"]
-zoom = ["prefix+z", "ctrl+alt+z"]
+# Herdr's own keybinding overlay, the fastest way to look a chord up in situ.
+help = "prefix+?"
+
+previous_tab = ["prefix+t+h"]
+next_tab = ["prefix+t+l"]
+new_tab = ["prefix+t+n"]
+split_vertical = ["prefix+v"]
+split_horizontal = ["prefix+h"]
+close_tab = ["prefix+t+x"]
+zoom = ["prefix+z"]
 # Modified Tab has no legacy terminal encoding and isn't documented as safe in
-# custom bindings, so the direct chord uses a letter instead.
-cycle_pane_next = ["prefix+tab", "ctrl+alt+t"]
-cycle_pane_previous = ["prefix+shift+tab", "ctrl+alt+shift+t"]
+# custom bindings, so this one keeps a direct chord and spells it with a letter.
+# Herdr's vetted prefix-free set: https://herdr.dev/docs/keyboard/
+cycle_pane_next = ["prefix+p+l", "ctrl+alt+p+l"]
+cycle_pane_previous = ["prefix+p+h"]
+close_pane = ["prefix+p+x"]
+# Up and down keys move between workspaces.
+workspace_picker = "prefix+w"
+# prefix+N, since plain prefix+n is the next tab.
+new_workspace = "prefix+w+n"
+close_workspace = "prefix+w+x"
 
 [ui]
 agent_panel_sort = "priority"

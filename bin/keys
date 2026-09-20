@@ -8,7 +8,9 @@ Fuzzy-searches cheatsheet.md and prints the matching keybindings and aliases.
 
   keys split      -> everything matching "split"
   keys nvim send  -> rows matching both terms
-  keys lg push    -> section shorthand: lg/vm/rc/hr narrow to a whole section
+  keys hr         -> section shorthand: lg/vm/rc/hr show that section alone
+  keys hr tab     -> and a sub-section name after one narrows further
+  keys lg push    -> any other term searches within the section
   keys            -> interactive picker if fzf is around, otherwise the lot
 
 Matching is a plain subsequence match done in Python, with no dependency on
@@ -129,8 +131,9 @@ def score(term, section, key, what):
 
     A section shorthand outscores everything else: typing it is an explicit
     "show me this section", and it should not lose to an incidental substring
-    hit like `rc` inside `src` or "force". Rows that match some other way are
-    still listed, just below the section.
+    hit like `rc` inside `src` or "force". Those incidental rows are then
+    dropped outright by the scoping in search(); the score only ranks whatever
+    survives it.
     """
     term = term.lower()
     if not term:
@@ -155,6 +158,32 @@ def score(term, section, key, what):
     return None
 
 
+def scope_level(terms, section):
+    """How specifically the query names this row's section. 0, 1 or 2.
+
+    1 means a section shorthand picked the section out, 2 means another term
+    then named one of its sub-sections. search() keeps only the rows at the
+    deepest level any row reached, so `hr` is Herdr and nothing else, and
+    `hr tab` is Herdr › Tabs and nothing else.
+
+    A sub-section only narrows underneath a shorthand, never on its own: a bare
+    `tab` should still find every tab binding across Lazygit, WezTerm and Herdr
+    rather than collapsing to the one sub-section that happens to be named for
+    it.
+    """
+    head, _, sub = section.partition("›")
+    if not any(
+        SECTION_ALIASES.get(term.lower(), "\0") in head.lower() for term in terms
+    ):
+        return 0
+    words = re.findall(r"\w+", sub.lower())
+    for term in terms:
+        term = term.lower()
+        if len(term) >= 2 and any(word.startswith(term) for word in words):
+            return 2
+    return 1
+
+
 def search(rows, terms):
     """Rows matching every term, grouped by section, best match first."""
     scored = []
@@ -168,11 +197,30 @@ def search(rows, terms):
         else:
             scored.append((total, idx, (section, key, what, source)))
 
+    # A shorthand is a filter, not just a ranking nudge: keep only the rows at
+    # the deepest scope anything reached, so `hr` drops the `src` alias and the
+    # WezTerm rows that merely contain an h and an r.
+    levels = {row[0]: scope_level(terms, row[0]) for _, _, row in scored}
+    deepest = max(levels.values(), default=0)
+    if deepest:
+        scored = [item for item in scored if levels[item[2][0]] == deepest]
+        # Scoping means the query asked for a section rather than for the best
+        # matches in it, so the answer is the section as written. Ranking here
+        # would reorder the table by where in each description the term landed,
+        # which is noise: `hr tab` would come back New, Next, Previous.
+        scored.sort(key=lambda item: item[1])
+        return [row for _, _, row in scored]
+
     # Rank sections by their strongest hit so headers are never repeated.
+    # Sections that tie fall back to the order they appear in the cheatsheet,
+    # not their names: "Herdr › Global, Tabs, Panes" is deliberate, and sorting
+    # alphabetically would shuffle it into Global, Panes, Tabs.
     best = {}
-    for total, _, row in scored:
+    order = {}
+    for total, idx, row in scored:
         best[row[0]] = max(best.get(row[0], total), total)
-    scored.sort(key=lambda item: (-best[item[2][0]], item[2][0], -item[0], item[1]))
+        order.setdefault(row[0], idx)
+    scored.sort(key=lambda item: (-best[item[2][0]], order[item[2][0]], -item[0], item[1]))
     return [row for _, _, row in scored]
 
 
