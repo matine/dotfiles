@@ -7,24 +7,45 @@ prefix = "ctrl+`"
 # Herdr's own keybinding overlay, the fastest way to look a chord up in situ.
 help = "prefix+?"
 
-previous_tab = ["prefix+t+h"]
-next_tab = ["prefix+t+l"]
-new_tab = ["prefix+t+n"]
+# Herdr chords are a single key plus modifiers -- there is no tmux-style
+# prefix-then-t-then-h sequence -- so the domain rides on a modifier instead:
+# bare for panes, alt for tabs, ctrl for workspaces.
+#
+# Bare and shifted hjkl belong to Herdr's own focus and swap defaults, so
+# nothing else may claim them -- prefix+hjkl still focuses panes, it is just
+# left to the default rather than repeated here. A binding that collides with
+# a default loses to it silently, and `herdr config check` reports the config
+# as fine, so the key merely appears to do the wrong thing.
+swap_pane_left = ["prefix+shift+h"]
+swap_pane_down = ["prefix+shift+j"]
+swap_pane_up = ["prefix+shift+k"]
+swap_pane_right = ["prefix+shift+l"]
+# One rule for cycling, with no leader to type: ctrl+alt plus the first letter
+# of the thing you are moving through -- t for tabs, p for panes, w for
+# workspaces -- and add shift to go the other way. Herdr vets prefix-free
+# chords against anything that would swallow ordinary typing; these pass.
+cycle_pane_next = ["ctrl+alt+p"]
+cycle_pane_previous = ["ctrl+alt+shift+p"]
+next_workspace = ["ctrl+alt+w"]
+previous_workspace = ["ctrl+alt+shift+w"]
 split_vertical = ["prefix+v"]
-split_horizontal = ["prefix+h"]
-close_tab = ["prefix+t+x"]
+split_horizontal = ["prefix+minus"]
+close_pane = ["prefix+x"]
 zoom = ["prefix+z"]
-# Modified Tab has no legacy terminal encoding and isn't documented as safe in
-# custom bindings, so this one keeps a direct chord and spells it with a letter.
-# Herdr's vetted prefix-free set: https://herdr.dev/docs/keyboard/
-cycle_pane_next = ["prefix+p+l", "ctrl+alt+p+l"]
-cycle_pane_previous = ["prefix+p+h"]
-close_pane = ["prefix+p+x"]
+
+# rename_tab sits in the alt domain with the rest of the tab commands rather
+# than on its prefix+shift+t default.
+rename_tab = ["prefix+alt+r"]
+previous_tab = ["ctrl+alt+shift+t"]
+next_tab = ["ctrl+alt+t"]
+new_tab = ["prefix+alt+n"]
+close_tab = ["prefix+alt+x"]
+
 # Up and down keys move between workspaces.
 workspace_picker = "prefix+w"
-# prefix+N, since plain prefix+n is the next tab.
-new_workspace = "prefix+w+n"
-close_workspace = "prefix+w+x"
+# Workspaces each hold their own tabs and panes.
+new_workspace = ["prefix+ctrl+n"]
+close_workspace = ["prefix+ctrl+x"]
 
 [ui]
 agent_panel_sort = "priority"

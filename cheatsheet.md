@@ -18,7 +18,7 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr 
 - [Karabiner](#karabiner) (3 entries)
 - [Neovim](#neovim) (20 entries)
 - [WezTerm](#wezterm) (13 entries)
-- [Herdr](#herdr) (14 entries)
+- [Herdr](#herdr) (22 entries)
 - [VS Code](#vs-code) (1 entries)
 - [Lazygit](#lazygit) (manual)
 - [Raycast](#raycast) (manual)
@@ -163,28 +163,36 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr 
 
 | Key / Alias | What it does | Source |
 | --- | --- | --- |
+| `ctrl+alt+w` | Next workspace | `backup/.config/herdr/config.toml` |
+| `ctrl+alt+shift+w` | Previous workspace | `backup/.config/herdr/config.toml` |
 | `prefix+w` | Workspace picker — Up and down keys move between workspaces. | `backup/.config/herdr/config.toml` |
-| `prefix+shift+n` | New workspace — prefix+N, since plain prefix+n is the next tab. | `backup/.config/herdr/config.toml` |
+| `prefix+ctrl+n` | New workspace | `backup/.config/herdr/config.toml` |
+| `prefix+ctrl+x` | Close workspace | `backup/.config/herdr/config.toml` |
 
 ### Tabs
 
 | Key / Alias | What it does | Source |
 | --- | --- | --- |
-| `prefix+p` | Previous tab | `backup/.config/herdr/config.toml` |
-| `prefix+n` | Next tab | `backup/.config/herdr/config.toml` |
-| `prefix+c` | New tab | `backup/.config/herdr/config.toml` |
-| `prefix+shift+x` | Close tab | `backup/.config/herdr/config.toml` |
+| `prefix+alt+r` | Rename tab | `backup/.config/herdr/config.toml` |
+| `ctrl+alt+shift+t` | Previous tab | `backup/.config/herdr/config.toml` |
+| `ctrl+alt+t` | Next tab | `backup/.config/herdr/config.toml` |
+| `prefix+alt+n` | New tab | `backup/.config/herdr/config.toml` |
+| `prefix+alt+x` | Close tab | `backup/.config/herdr/config.toml` |
 
 ### Panes
 
 | Key / Alias | What it does | Source |
 | --- | --- | --- |
+| `prefix+shift+h` | Swap pane left | `backup/.config/herdr/config.toml` |
+| `prefix+shift+j` | Swap pane down | `backup/.config/herdr/config.toml` |
+| `prefix+shift+k` | Swap pane up | `backup/.config/herdr/config.toml` |
+| `prefix+shift+l` | Swap pane right | `backup/.config/herdr/config.toml` |
+| `ctrl+alt+p` | Cycle pane next | `backup/.config/herdr/config.toml` |
+| `ctrl+alt+shift+p` | Cycle pane previous | `backup/.config/herdr/config.toml` |
 | `prefix+v` | Split vertical | `backup/.config/herdr/config.toml` |
 | `prefix+minus` | Split horizontal | `backup/.config/herdr/config.toml` |
-| `prefix+z` | Zoom | `backup/.config/herdr/config.toml` |
-| `prefix+tab` / `ctrl+alt+t` | Cycle pane next | `backup/.config/herdr/config.toml` |
-| `prefix+shift+tab` | Cycle pane previous | `backup/.config/herdr/config.toml` |
 | `prefix+x` | Close pane | `backup/.config/herdr/config.toml` |
+| `prefix+z` | Zoom | `backup/.config/herdr/config.toml` |
 
 > **Note:** `prefix` in the tables above means press `` ctrl+` `` first.
 
