@@ -1,36 +1,16 @@
 {
-  "enabledPlugins": {
-    "playwright@claude-plugins-official": true
-  },
-  "theme": "dark",
-
   "permissions": {
-    "defaultMode": "acceptEdits",
-    "additionalDirectories": ["~/dotfiles"],
     "deny": [
       "Edit(~/dotfiles/**/.claude/settings.json)",
-      "Edit(~/dotfiles/**/.claude/settings.local.json)"
-    ]
+      "Edit(~/dotfiles/**/.claude/settings.local.json)",
+      "Edit(~/dotfiles/**/.claude/hooks/**)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.claude/settings.local.json)",
+      "Edit(~/.claude/hooks/**)"
+    ],
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": ["~/dotfiles"]
   },
-
-  "sandbox": {
-    "enabled": true,
-    "failIfUnavailable": true,
-    "autoAllowBashIfSandboxed": true,
-    "filesystem": {
-      "denyRead": ["~/"],
-      "allowRead": ["~/ClaudeAccess", "~/dotfiles", "~/.config/herdr"],
-      "allowWrite": [
-        "~/ClaudeAccess",
-        "~/dotfiles",
-        "~/.config/herdr/herdr.sock"
-      ]
-    },
-    "network": {
-      "allowUnixSockets": ["/Users/matinechabrier/.config/herdr/herdr.sock"]
-    }
-  },
-
   "hooks": {
     "PreToolUse": [
       {
@@ -56,5 +36,28 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowUnixSockets": ["/Users/matinechabrier/.config/herdr/herdr.sock"]
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/ClaudeAccess",
+        "~/dotfiles",
+        "~/.config/herdr/herdr.sock"
+      ],
+      "denyRead": ["~/"],
+      "allowRead": ["~/ClaudeAccess", "~/dotfiles", "~/.config/herdr"]
+    }
+  },
+  "theme": "dark"
 }
