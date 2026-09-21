@@ -3,6 +3,11 @@ npm-debug.log
 
 **/.claude/settings.local.json
 
+# Claude Code state and account credentials, ignored machine-wide so a stray
+# copy can't be committed from any repo
+**/.claude.json
+**/.credentials.json
+
 # Machine-local shell secrets (see dotfiles README > Secrets)
 .zshrc.local
 

@@ -4,3 +4,11 @@
 .zshrc.local
 **/.zshrc.local
 *.local.zsh
+
+# Claude Code state and credentials. ~/.claude.json holds project history and
+# account tokens alongside its config, so it stays out of here; scripts/claude-mcp.sh
+# rebuilds the part worth keeping. Same safety-net reasoning as above.
+.claude.json
+**/.claude.json
+.credentials.json
+**/.credentials.json
