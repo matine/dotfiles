@@ -32,6 +32,18 @@
   },
 
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 '/Users/matinechabrier/.claude/hooks/restrict-write-paths.py'",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "*",
