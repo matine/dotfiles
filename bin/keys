@@ -8,7 +8,7 @@ Fuzzy-searches cheatsheet.md and prints the matching keybindings and aliases.
 
   keys split      -> everything matching "split"
   keys nvim send  -> rows matching both terms
-  keys hr         -> section shorthand: lg/vm/rc/hr show that section alone
+  keys hr         -> section shorthand: lg/vm/rc/hr/yz show that section alone
   keys hr tab     -> and a sub-section name after one narrows further
   keys lg push    -> any other term searches within the section
   keys            -> interactive picker if fzf is around, otherwise the lot
@@ -41,6 +41,7 @@ SECTION_ALIASES = {
     "vm": "neovim",
     "rc": "raycast",
     "hr": "herdr",
+    "yz": "yazi",
 }
 
 # Widest the key column is allowed to get before it wraps.
