@@ -18,7 +18,7 @@ import sys
 
 ALLOWED = [
     os.path.realpath(os.path.expanduser(p))
-    for p in ("~/ClaudeAccess", "~/dotfiles")
+    for p in ("~/ClaudeAccess", "~/dotfiles", "~/.claude/plans")
 ]
 
 
