@@ -1,0 +1,4 @@
+# nvim-remote opens files in the nvim that launched lazygit (e.g. from its
+# terminal) instead of starting a second one; outside nvim it opens a new one.
+os:
+  editPreset: nvim-remote

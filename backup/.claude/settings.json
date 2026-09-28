@@ -1,5 +1,30 @@
 {
   "permissions": {
+    "allow": [
+      "mcp__github__get_commit",
+      "mcp__github__get_file_contents",
+      "mcp__github__get_label",
+      "mcp__github__get_latest_release",
+      "mcp__github__get_release_by_tag",
+      "mcp__github__get_tag",
+      "mcp__github__issue_read",
+      "mcp__github__pull_request_read",
+      "mcp__github__list_branches",
+      "mcp__github__list_commits",
+      "mcp__github__list_issues",
+      "mcp__github__list_issue_types",
+      "mcp__github__list_pull_requests",
+      "mcp__github__list_releases",
+      "mcp__github__list_tags",
+      "mcp__github__search_code",
+      "mcp__github__search_commits",
+      "mcp__github__search_issues",
+      "mcp__github__search_pull_requests",
+      "mcp__github__search_repositories",
+      "mcp__github__actions_get",
+      "mcp__github__actions_list",
+      "mcp__github__get_job_logs"
+    ],
     "deny": [
       "Edit(~/dotfiles/**/.claude/settings.json)",
       "Edit(~/dotfiles/**/.claude/settings.local.json)",
@@ -9,7 +34,9 @@
       "Edit(~/.claude/hooks/**)"
     ],
     "defaultMode": "acceptEdits",
-    "additionalDirectories": ["~/dotfiles"]
+    "additionalDirectories": [
+      "~/dotfiles"
+    ]
   },
   "hooks": {
     "PreToolUse": [
@@ -18,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 '/Users/matinechabrier/.claude/hooks/restrict-write-paths.py'",
+            "command": "python3 \"$HOME/.claude/hooks/restrict-write-paths.py\"",
             "timeout": 10
           }
         ]
@@ -30,7 +57,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '/Users/matinechabrier/.claude/hooks/herdr-agent-state.sh' session",
+            "command": "bash \"$HOME/.claude/hooks/herdr-agent-state.sh\" session",
             "timeout": 10
           }
         ]
@@ -39,7 +66,16 @@
   },
   "enabledPlugins": {
     "playwright@claude-plugins-official": true,
-    "vercel@claude-plugins-official": true
+    "vercel@claude-plugins-official": true,
+    "mcpmarket-me@mcpmarket-me": true
+  },
+  "extraKnownMarketplaces": {
+    "mcpmarket-me": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/matinechabrier/.claude/plugins/mcpmarket-me"
+      }
+    }
   },
   "sandbox": {
     "enabled": true,
@@ -47,7 +83,9 @@
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false,
     "network": {
-      "allowUnixSockets": ["/Users/matinechabrier/.config/herdr/herdr.sock"]
+      "allowUnixSockets": [
+        "/Users/matinechabrier/.config/herdr/herdr.sock"
+      ]
     },
     "filesystem": {
       "allowWrite": [
@@ -55,8 +93,14 @@
         "~/dotfiles",
         "~/.config/herdr/herdr.sock"
       ],
-      "denyRead": ["~/"],
-      "allowRead": ["~/ClaudeAccess", "~/dotfiles", "~/.config/herdr"]
+      "denyRead": [
+        "~/"
+      ],
+      "allowRead": [
+        "~/ClaudeAccess",
+        "~/dotfiles",
+        "~/.config/herdr"
+      ]
     }
   },
   "theme": "dark"

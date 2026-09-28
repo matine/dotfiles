@@ -13,40 +13,51 @@ if ! command -v claude >/dev/null; then
   exit 0
 fi
 
-# add_http <name> <url> [token_var]
+# add_http <name> <url> [token_var] [header...]
 # Without token_var the server is expected to authenticate interactively via
 # /mcp -> Authenticate. With it, the Authorization header is stored with the
-# variable unexpanded.
+# variable unexpanded. Pass "" as token_var to send extra headers without one.
 # Skips servers that already exist, so re-running this never drops a stored
 # credential and forces you to re-authenticate.
 add_http() {
-  if claude mcp list 2>/dev/null | grep -qE "(^|[[:space:]])$1:"; then
-    chirp --skip "$1 is already registered"
+  name=$1 url=$2 token_var=$3
+  shift 2
+  [ $# -gt 0 ] && shift
+
+  if claude mcp list 2>/dev/null | grep -qE "(^|[[:space:]])$name:"; then
+    chirp --skip "$name is already registered"
     return
   fi
 
-  if [ -n "$3" ]; then
+  if [ -n "$token_var" ]; then
     # A missing value only surfaces as a 401 at connect time, which reads like a
     # bad token rather than an unset one, so say so now.
-    eval "token=\$$3"
+    eval "token=\$$token_var"
     if [ -z "$token" ]; then
-      chirp --warn "$3 is not set - add it to ~/.zshrc.local and open a new shell"
+      chirp --warn "$token_var is not set - add it to ~/.zshrc.local and open a new shell"
     fi
 
-    claude mcp add --transport http --scope user "$1" "$2" \
-      --header "Authorization: Bearer \${$3}"
-  else
-    claude mcp add --transport http --scope user "$1" "$2"
+    set -- "$@" "Authorization: Bearer \${$token_var}"
   fi
 
-  chirp --success "Registered $1"
+  # Turn each remaining header into a --header flag (sh has no arrays).
+  for header do
+    set -- "$@" --header "$header"
+    shift
+  done
+
+  claude mcp add --transport http --scope user "$name" "$url" "$@"
+
+  chirp --success "Registered $name"
 }
 
 chirp --info "Registering servers"
 
 # GitHub's MCP endpoint does not support dynamic client registration, so the
 # interactive flow fails with "Incompatible auth server". A fine-grained PAT
-# passed as a header is the working path.
-add_http github https://api.githubcopilot.com/mcp GITHUB_MCP_TOKEN
+# passed as a header is the working path. X-MCP-Toolsets limits the tools
+# loaded; keep it in step with the mcp__github__ allow list in settings.json.
+add_http github https://api.githubcopilot.com/mcp GITHUB_MCP_TOKEN \
+  "X-MCP-Toolsets: repos,issues,pull_requests,actions"
 
 chirp --info "Restart Claude Code, then run /mcp to verify"

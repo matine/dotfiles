@@ -16,7 +16,7 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr,
 - [Shell functions](#shell-functions) (2 entries)
 - [Git aliases](#git-aliases) (27 entries)
 - [Karabiner](#karabiner) (3 entries)
-- [Neovim](#neovim) (23 entries)
+- [Neovim](#neovim) (13 entries)
 - [WezTerm](#wezterm) (13 entries)
 - [Herdr](#herdr) (22 entries)
 - [VS Code](#vs-code) (1 entries)
@@ -108,16 +108,6 @@ Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr,
 | --- | --- | --- |
 | `<c-s>` | Save — `:write<cr>` _(mode: n)_ | `backup/.config/nvim/lua/config/keymaps.lua` |
 | `<leader>r` | Restart — `:restart<cr>` _(mode: n)_ | `backup/.config/nvim/lua/config/keymaps.lua` |
-| `<tab>` | Goto/Apply Next Edit Suggestion — folke/sidekick.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<c-.>` | Sidekick Focus — folke/sidekick.nvim _(mode: n,t,i,x)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>aa` | Sidekick Toggle CLI — folke/sidekick.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>as` | Select CLI — folke/sidekick.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>ad` | Detach a CLI Session — folke/sidekick.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>at` | Send This — folke/sidekick.nvim _(mode: x,n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>af` | Send File — folke/sidekick.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>av` | Send Visual Selection — folke/sidekick.nvim _(mode: x)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>ap` | Sidekick Select Prompt — folke/sidekick.nvim _(mode: n,x)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
-| `<leader>ac` | Sidekick Toggle Claude — folke/sidekick.nvim _(mode: n)_ | `backup/.config/nvim/lua/plugins/sidekick.lua` |
 | `<c-h>` | Resize left — mrjones2014/smart-splits.nvim _(mode: n,t,x)_ | `backup/.config/nvim/lua/plugins/tmux.lua` |
 | `<c-j>` | Resize down — mrjones2014/smart-splits.nvim _(mode: n,t,x)_ | `backup/.config/nvim/lua/plugins/tmux.lua` |
 | `<c-k>` | Resize up — mrjones2014/smart-splits.nvim _(mode: n,t,x)_ | `backup/.config/nvim/lua/plugins/tmux.lua` |
