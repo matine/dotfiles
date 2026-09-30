@@ -20,7 +20,7 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-KEYS="$DIR/bin/keys"
+KEYS="$DIR/home/.local/bin/keys"
 
 if [ ! -x "$KEYS" ]; then
 	echo "keys not found or not executable at $KEYS"

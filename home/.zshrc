@@ -21,9 +21,9 @@ source $HOMEBREW/share/antigen/antigen.zsh
 antigen init ~/.antigenrc
 
 # ZSH
-source $DOTFILES/shell/alias.zsh
-source $DOTFILES/shell/exports.zsh
-source $DOTFILES/shell/functions.zsh
+source $HOME/.config/zsh/alias.zsh
+source $HOME/.config/zsh/exports.zsh
+source $HOME/.config/zsh/functions.zsh
 
 # Zoxide
 eval "$(zoxide init --cmd cd zsh)"
@@ -33,12 +33,10 @@ eval "$(pyenv init --path)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Make all bins executable
-chmod +x $DOTFILES/bin/*
 # Make all shell scripts executable
 chmod +x $DOTFILES/scripts/*
-# Add bin to PATH
-export PATH=$PATH:$DOTFILES/bin
+# Add local bin to PATH
+export PATH=$PATH:$HOME/.local/bin
 
 # tabtab source for packages
 # uninstall by removing these lines

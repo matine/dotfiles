@@ -8,7 +8,7 @@
     "typescript": "typescriptreact"
   },
   "editor.tabSize": 2,
-  "prettier.resolveGlobalModules": true,
+  "prettier.resolveGlobalModules": false,
   "editor.wordWrap": "on",
   "eslint.probe": [
     "javascript",
@@ -20,18 +20,15 @@
     "markdown",
     "mdx"
   ],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "html",
-    "typescriptreact"
-  ],
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll.eslint": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": true,
   "editor.inlineSuggest.enabled": true,
   "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.codeActionsOnSave.rules": null,
   "auto-rename-tag.activationOnLanguage": ["html", "xml", "php", "javascript"],

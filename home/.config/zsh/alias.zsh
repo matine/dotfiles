@@ -1,5 +1,5 @@
 # Show this file
-alias a="bat $DOTFILES/shell/alias.zsh"
+alias a="bat $HOME/.config/zsh/alias.zsh"
 
 # Show every keybinding and alias (opens rendered, see editorAssociations in VSCode settings)
 alias cheat="code $DOTFILES/cheatsheet.md"
@@ -30,7 +30,7 @@ alias lg="lazygit"
 alias bi="brew install"
 alias bu="brew uninstall"
 alias bup="brew upgrade"
-alias bfile="brew bundle dump --force --file=$DOTFILES/backup/.Brewfile"
+alias bfile="brew bundle dump --force --file=$DOTFILES/home/.Brewfile"
 
 # Remap ls to eza
 alias ls="eza --all --hyperlink"

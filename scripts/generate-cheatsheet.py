@@ -149,7 +149,7 @@ preserves everything between the MANUAL markers.
 
 YAZI_TEMPLATE = """\
 Yazi opens as a float over nvim — `<leader>e` at the cwd, `<leader>-` at the
-current file, `<c-up>` to resume the last session. These are yazi's built-in
+current file, `Ctrl-Up` to resume the last session. These are yazi's built-in
 defaults rather than repo config (there is no `keymap.toml`), so this section is
 maintained by hand -- the generator preserves everything between the MANUAL
 markers.
@@ -174,15 +174,15 @@ markers.
 
 | Key | What it does |
 | --- | --- |
-| `<c-v>` | Open the selected file in a vertical split |
-| `<c-x>` | Open the selected file in a horizontal split |
-| `<c-t>` | Open the selected file in a new nvim tab |
-| `<c-o>` | Open the file and pick which window it lands in |
-| `<c-s>` | Grep in the current directory |
-| `<c-y>` | Copy the relative path to the clipboard |
-| `<c-q>` | Send the selected files to the quickfix list |
+| `Ctrl-v` | Open the selected file in a vertical split |
+| `Ctrl-x` | Open the selected file in a horizontal split |
+| `Ctrl-t` | Open the selected file in a new nvim tab |
+| `Ctrl-o` | Open the file and pick which window it lands in |
+| `Ctrl-s` | Grep in the current directory |
+| `Ctrl-y` | Copy the relative path to the clipboard |
+| `Ctrl-q` | Send the selected files to the quickfix list |
 | `tab` | Cycle through the open buffers |
-| `<c-\\>` | Change nvim's working directory to the one yazi is in |
+| `Ctrl-\\` | Change nvim's working directory to the one yazi is in |
 
 ### Navigation
 
@@ -193,7 +193,7 @@ markers.
 | `enter` | Open the selected file or directory |
 | `H` / `L` | Go back / forward through visited directories |
 | `g g` / `G` | Jump to the top / bottom of the listing |
-| `<c-u>` / `<c-d>` | Half page up / down |
+| `Ctrl-u` / `Ctrl-d` | Half page up / down |
 | `g` then `h` | Go home (`~`) |
 | `g` then `c` | Go to `~/.config` |
 | `g` then `d` | Go to `~/Downloads` |
@@ -225,8 +225,8 @@ markers.
 | `space` | Toggle selection on the current file and move down |
 | `v` | Visual mode — select as you move |
 | `V` | Visual mode that unselects instead |
-| `<c-a>` | Select everything |
-| `<c-r>` | Invert the selection |
+| `Ctrl-a` | Select everything |
+| `Ctrl-r` | Invert the selection |
 
 ### Find & search
 
@@ -236,7 +236,7 @@ markers.
 | `n` / `N` | Jump to the next / previous match |
 | `s` | Search by filename with fd, across subdirectories |
 | `S` | Search by file contents with ripgrep |
-| `<c-s>` | Cancel the running search |
+| `Ctrl-s` | Cancel the running search |
 
 ### Tabs
 
@@ -246,15 +246,205 @@ markers.
 | `1` … `9` | Switch to that tab |
 | `[` / `]` | Previous / next tab |
 | `{` / `}` | Swap the current tab with the one before / after it |
-| `<c-c>` | Close the current tab |
+| `Ctrl-c` | Close the current tab |
+"""
+
+CLAUDE_TEMPLATE = """\
+Claude runs in its own herdr pane and connects to nvim through claudecode.nvim's
+IDE server — see [Claude Code](#claude-code) under Neovim for the nvim side.
+Maintained by hand -- the generator preserves everything between the MANUAL
+markers.
+
+> **Note:** `CLAUDE_CODE_AUTO_CONNECT_IDE` (in `home/.config/zsh/exports.zsh`) connects
+> Claude on start — start it in the same directory as nvim.
+
+|  |  |
+| --- | --- |
+| `/ide` | Pick the IDE to connect to, or show the current one |
+"""
+
+NVIM_CLAUDE_TEMPLATE = """\
+The nvim side of the [Claude](#claude) connection. The keys come from LazyVim's
+`ai.claudecode` extra rather than repo config, so this block is maintained by
+hand -- the generator preserves everything between the MANUAL markers.
+
+|  |  |
+| --- | --- |
+| `:ClaudeCodeStatus` | Check the IDE server is running |
+| `:ClaudeCodeStart` | Start the server if it isn't running |
+| `<leader>as` | Send the visual selection to Claude _(mode: v)_ |
+| `<leader>ab` | Add the current buffer to Claude's context |
+| `<leader>aa` | Accept Claude's proposed diff |
+| `<leader>ad` | Reject Claude's proposed diff |
+"""
+
+NVIM_NAVIGATION_TEMPLATE = """\
+Built into nvim (and LazyVim) rather than repo config, so this block is
+maintained by hand -- the generator preserves everything between the MANUAL
+markers. A count before a motion repeats it: `2w` moves two words.
+
+#### Within a line
+
+| Key | What it does |
+| --- | --- |
+| `h` `j` `k` `l` | Move left / down / up / right (arrow keys also work) |
+| `w` | Jump to the start of the next word |
+| `e` | Jump to the end of the current word |
+| `b` | Jump back to the start of the previous word |
+| `0` | Jump to the start of the line |
+| `$` | Jump to the end of the line |
+
+#### Within a file
+
+| Key | What it does |
+| --- | --- |
+| `gg` | Go to the first line of the file |
+| `G` | Go to the last line of the file |
+| `{count}G` | Go to line number `{count}` |
+| `%` | Jump to the matching `(`, `[` or `{` |
+| `zt` / `zz` / `zb` | Scroll so the current line sits at the top / middle / bottom of the window |
+| `Ctrl-g` | Show the file name and cursor position |
+
+#### Jumping back and forth
+
+A "jump" is any big move: `gg`, `G`, `/search`, `n`, `%`, going to a definition,
+opening a file from a picker. Nvim remembers where each one started (the
+_jumplist_, see it with `:jumps`).
+
+| Key | What it does |
+| --- | --- |
+| `Ctrl-o` | Go back to the previous position, even in another file |
+| `Ctrl-i` | Go forward again (same key as `Tab` in a terminal) |
+
+#### Buffers and windows
+
+| Key | What it does |
+| --- | --- |
+| `H` | Previous buffer (LazyVim -- stock nvim's `H` jumps to the top of the screen) |
+| `L` | Next buffer (LazyVim -- stock nvim's `L` jumps to the bottom of the screen) |
+| `Ctrl-w Ctrl-w` | Jump to the next window |
+
+#### Search
+
+| Key | What it does |
+| --- | --- |
+| `/text` | Search forwards for `text` |
+| `?text` | Search backwards for `text` |
+| `n` / `N` | Next match / match in the opposite direction |
+"""
+
+NVIM_INSERT_TEMPLATE = """\
+Keys that put you into Insert mode, so you can type text. Built into nvim rather
+than repo config, so this block is maintained by hand -- the generator preserves
+everything between the MANUAL markers.
+
+| Key | What it does |
+| --- | --- |
+| `Esc` | Back to Normal mode, or cancel a half-typed command |
+| `i` | Insert before the cursor |
+| `a` | Append after the cursor |
+| `I` | Insert at the start of the line |
+| `A` | Append at the end of the line |
+| `o` | Open a new line below and start inserting |
+| `O` | Open a new line above and start inserting |
+| `r{char}` | Replace the character under the cursor with `{char}`, staying in Normal mode |
+| `R` | Replace mode -- overwrite characters as you type until `Esc` |
+| `u` | Undo the last change |
+| `U` | Undo every change on the current line |
+| `Ctrl-r` | Redo |
+"""
+
+NVIM_DELETE_TEMPLATE = """\
+Deleting follows `operator [count] motion` -- `d2w` deletes two words. Anything
+deleted is also saved to a register, so `p` can paste it back. Built into nvim
+rather than repo config, so this block is maintained by hand -- the generator
+preserves everything between the MANUAL markers.
+
+| Key | What it does |
+| --- | --- |
+| `x` | Delete the character under the cursor |
+| `dw` | Delete to the start of the next word |
+| `de` | Delete to the end of the word |
+| `d$` | Delete to the end of the line |
+| `D` | Same as `d$` |
+| `dd` | Delete the whole line (`2dd` deletes two lines) |
+| `cw` / `ce` | Change the word -- deletes it, then starts inserting |
+| `c$` | Change to the end of the line -- deletes it, then starts inserting |
+| `C` | Same as `c$`. Easy to hit by accident: it deletes to the end of the line and switches to Insert mode |
+| `cc` | Change the whole line |
+| `:s/old/new` | Replace the first match on the line |
+| `:s/old/new/g` | Replace every match on the line |
+| `:%s/old/new/g` | Replace every match in the file |
+| `:%s/old/new/gc` | Same, asking before each replacement |
+"""
+
+NVIM_YANK_TEMPLATE = """\
+Yank is Vim's word for copy. Like delete, it takes a motion: `yw` copies a word.
+Built into nvim rather than repo config, so this block is maintained by hand --
+the generator preserves everything between the MANUAL markers.
+
+| Key | What it does |
+| --- | --- |
+| `yw` | Copy to the start of the next word |
+| `y$` | Copy to the end of the line |
+| `yy` | Copy the whole line (`2yy` copies two lines) |
+| `v` then a motion, then `y` | Select text visually, then copy it |
+| `p` | Paste the last yanked or deleted text after the cursor (lines go below) |
+| `P` | Paste before the cursor (lines go above) |
+"""
+
+NVIM_COMMANDS_TEMPLATE = """\
+Ex commands, typed after `:`. Built into nvim rather than repo config, so this
+block is maintained by hand -- the generator preserves everything between the
+MANUAL markers.
+
+#### Files and shell
+
+| Key | What it does |
+| --- | --- |
+| `:w` | Save |
+| `:q` | Quit (or close the help window) |
+| `:wq` | Save and quit |
+| `:q!` | Quit, throwing away changes |
+| `:w FILENAME` | Save to `FILENAME` |
+| `:r FILENAME` | Insert the contents of `FILENAME` below the cursor |
+| `:r !ls` | Insert the output of a shell command below the cursor |
+| `:!command` | Run a shell command, like `:!ls` |
+| `:e $MYVIMRC` | Open your config |
+
+#### Options and help
+
+| Key | What it does |
+| --- | --- |
+| `:set ic` / `:set is` / `:set hls` | Ignore case / show matches while typing / highlight all matches |
+| `:set noic` | Prefix `no` to turn an option off |
+| `:set invic` | Prefix `inv` to toggle an option |
+| `:help` / `F1` | Open help |
+| `:help TOPIC` | Help on `TOPIC` |
+| `Ctrl-d` / `Tab` | On the `:` line -- list / cycle through completions |
 """
 
 # (title, anchor, marker key, starting content if the section is missing)
 MANUAL_SECTIONS = [
     ("Lazygit", "lazygit", "lazygit", LAZYGIT_TEMPLATE),
     ("Yazi", "yazi", "yazi", YAZI_TEMPLATE),
+    ("Claude", "claude", "claude", CLAUDE_TEMPLATE),
     ("Raycast", "raycast", "raycast", RAYCAST_TEMPLATE),
 ]
+
+
+# Hand-written `###` blocks appended to a generated section, keyed by its anchor:
+# (subtitle, marker key, starting content if the block is missing)
+MANUAL_SUBSECTIONS = {
+    "neovim": [
+        ("Claude Code", "nvim-claude-code", NVIM_CLAUDE_TEMPLATE),
+        ("Navigation", "nvim-navigation", NVIM_NAVIGATION_TEMPLATE),
+        ("Insert", "nvim-insert", NVIM_INSERT_TEMPLATE),
+        ("Delete", "nvim-delete", NVIM_DELETE_TEMPLATE),
+        ("Yank", "nvim-yank", NVIM_YANK_TEMPLATE),
+        ("Commands", "nvim-commands", NVIM_COMMANDS_TEMPLATE),
+    ],
+}
 
 
 def manual_markers(key):
@@ -684,6 +874,24 @@ def _lua_modes(entry):
     return lua_field(entry, "mode") or "n"
 
 
+CTRL_NAMES = {"c": "Ctrl", "a": "Alt", "m": "Alt", "s": "Shift"}
+
+
+def pretty_key(lhs):
+    """Spell nvim's <c-x> notation as Ctrl-x, so nobody reads C as Shift-c."""
+
+    def spell(found):
+        mods = [CTRL_NAMES[m.lower()] for m in found.group(1).split("-")[:-1]]
+        key = found.group(2)
+        return "-".join(mods + [key.capitalize() if len(key) > 1 else key])
+
+    return re.sub(r"<((?:[cCaAmMsS]-)+)([^>]+)>", spell, lhs)
+
+
+# Plugin specs whose keys are left off the cheatsheet.
+NVIM_SKIP_PLUGINS = {"tmux.lua"}
+
+
 def parse_nvim_keymaps(path):
     """Direct vim.keymap.set calls."""
     text = read(path)
@@ -714,7 +922,7 @@ def parse_nvim_keymaps(path):
             what = code(rhs.group(1))
         else:
             what = "(lua function)"
-        rows.append((code(lhs), "{} _(mode: {})_".format(what, modes), code(rel(path))))
+        rows.append((code(pretty_key(lhs)), "{} _(mode: {})_".format(what, modes), code(rel(path))))
     return rows
 
 
@@ -723,6 +931,8 @@ def parse_nvim_plugin_keys(directory):
     rows = []
     notes = []
     for path in sorted(Path(directory).glob("*.lua")):
+        if path.name in NVIM_SKIP_PLUGINS:
+            continue
         text = read(path)
         if text is None:
             continue
@@ -746,7 +956,7 @@ def parse_nvim_plugin_keys(directory):
             what = cell(desc) if desc else "(lua function)"
             rows.append(
                 (
-                    code(lhs),
+                    code(pretty_key(lhs)),
                     "{} — {} _(mode: {})_".format(what, cell(label), _lua_modes(entry)),
                     code(rel(path)),
                 )
@@ -945,8 +1155,9 @@ def render(sections, manual_bodies):
         "Every keybinding and alias defined in this repo, grouped by tool.",
         "",
         "> Generated by `scripts/generate-cheatsheet.py` — re-run it after changing any",
-        "> config rather than editing this file. The {} sections are the".format(manual_titles),
-        "> exception: they are hand-written and preserved across runs.",
+        "> config rather than editing this file. The {} sections, and Neovim's".format(manual_titles),
+        "> Claude Code, Navigation, Insert, Delete, Yank and Commands subsections, are the exception: they are hand-written and",
+        "> preserved across runs.",
         "",
         "Search it with `keys <terms>` or the Raycast \"Search keybindings\" command.",
         "Section shorthands: `lg` = Lazygit, `vm` = Neovim, `rc` = Raycast, `hr` = Herdr,",
@@ -975,6 +1186,9 @@ def render(sections, manual_bodies):
         for note in section.notes:
             out.append("> **Note:** " + note)
             out.append("")
+        for subtitle, key, _ in MANUAL_SUBSECTIONS.get(section.anchor, []):
+            begin, end = manual_markers(key)
+            out += ["### " + subtitle, "", begin, manual_bodies[key].rstrip(), end, ""]
 
     for title, _, key, _ in MANUAL_SECTIONS:
         begin, end = manual_markers(key)
@@ -991,7 +1205,8 @@ def existing_manuals(output):
     """Keep whatever the user typed between the markers on a previous run."""
     text = read(output)
     bodies = {}
-    for _, _, key, template in MANUAL_SECTIONS:
+    subsections = [(key, template) for subs in MANUAL_SUBSECTIONS.values() for _, key, template in subs]
+    for key, template in [(key, template) for _, _, key, template in MANUAL_SECTIONS] + subsections:
         bodies[key] = template
         if text is None:
             continue
@@ -1017,22 +1232,22 @@ def main():
     args = parser.parse_args()
     output = Path(args.output)
 
-    backup = REPO / "backup"
+    home = REPO / "home"
     candidates = [
-        ("shell aliases", lambda: parse_shell_aliases(REPO / "shell" / "alias.zsh")),
-        ("shell functions", lambda: parse_shell_functions(REPO / "shell" / "functions.zsh")),
-        ("git aliases", lambda: parse_git_aliases(backup / ".gitconfig")),
+        ("shell aliases", lambda: parse_shell_aliases(REPO / "home" / ".config" / "zsh" / "alias.zsh")),
+        ("shell functions", lambda: parse_shell_functions(REPO / "home" / ".config" / "zsh" / "functions.zsh")),
+        ("git aliases", lambda: parse_git_aliases(home / ".gitconfig")),
         (
             "karabiner",
-            lambda: parse_karabiner(backup / ".config" / "karabiner" / "karabiner.json"),
+            lambda: parse_karabiner(home / ".config" / "karabiner" / "karabiner.json"),
         ),
-        ("neovim", lambda: parse_nvim(backup / ".config" / "nvim")),
-        ("wezterm", lambda: parse_wezterm(backup / ".config" / "wezterm" / "wezterm.lua")),
-        ("herdr", lambda: parse_herdr(backup / ".config" / "herdr" / "config.toml")),
+        ("neovim", lambda: parse_nvim(home / ".config" / "nvim")),
+        ("wezterm", lambda: parse_wezterm(home / ".config" / "wezterm" / "wezterm.lua")),
+        ("herdr", lambda: parse_herdr(home / ".config" / "herdr" / "config.toml")),
         (
             "vs code",
             lambda: parse_vscode(
-                backup / "Library" / "Application Support" / "Code" / "User" / "keybindings.json"
+                home / "Library" / "Application Support" / "Code" / "User" / "keybindings.json"
             ),
         ),
     ]

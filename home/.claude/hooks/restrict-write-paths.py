@@ -42,7 +42,7 @@ def main():
             "permissionDecision": "deny",
             "permissionDecisionReason": (
                 f"{target} is outside ~/ClaudeAccess and ~/dotfiles. "
-                "Edit the file in ~/dotfiles/backup and let stow symlink it."
+                "Edit the file in ~/dotfiles/home and let stow symlink it."
             ),
         }
     }))

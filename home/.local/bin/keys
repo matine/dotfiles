@@ -30,7 +30,7 @@ import sys
 import textwrap
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parents[3]
 DEFAULT_SHEET = REPO / "cheatsheet.md"
 
 # Short names for whole sections, so `keys lg push` beats typing "lazygit".

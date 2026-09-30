@@ -7,11 +7,11 @@ echo "Making dotfiles script files executable..."
 chmod +x ~/dotfiles/scripts/*
 
 echo "Temporarily symlinking necessary files (.zshrc, .zshenv, .zprofile, .antigenrc, .Brewfile)..."
-ln -s ~/dotfiles/backup/.zshrc ~/.zshrc
-ln -s ~/dotfiles/backup/.zshenv ~/.zshenv
-ln -s ~/dotfiles/backup/.zprofile ~/.zprofile
-ln -s ~/dotfiles/backup/.antigenrc ~/.antigenrc
-ln -s ~/dotfiles/backup/.Brewfile ~/.Brewfile
+ln -s ~/dotfiles/home/.zshrc ~/.zshrc
+ln -s ~/dotfiles/home/.zshenv ~/.zshenv
+ln -s ~/dotfiles/home/.zprofile ~/.zprofile
+ln -s ~/dotfiles/home/.antigenrc ~/.antigenrc
+ln -s ~/dotfiles/home/.Brewfile ~/.Brewfile
 
 exho "Refreshing shell..."
 source ~/.zshrc
@@ -29,8 +29,8 @@ rm ~/.zprofile
 rm ~/.antigenrc
 rm ~/.Brewfile
 
-echo "Symlinking backup folder with stow..."
-cd ~/dotfiles/backup
+echo "Symlinking home folder with stow..."
+cd ~/dotfiles/home
 stow . -t ~/ --no-folding
 cd ~/dotfiles
 

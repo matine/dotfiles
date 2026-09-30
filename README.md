@@ -69,7 +69,7 @@ sources it at the end of the file:
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 ```
 
-`.zshrc.local` is also listed in the global git excludes (`backup/.gitignore`, symlinked
+`.zshrc.local` is also listed in the global git excludes (`home/.gitignore`, symlinked
 to `~/.gitignore` via `core.excludesfile`) and in this repo's own `.gitignore`, as a
 safety net in case a copy ever lands inside the repo.
 
@@ -95,7 +95,7 @@ shell history. Keep the file at mode `600`.
 
 ### Adding a new credential
 
-Put the `export` in `~/.zshrc.local`. Never in `backup/.zshrc`, `shell/exports.zsh`, or
+Put the `export` in `~/.zshrc.local`. Never in `home/.zshrc`, `home/.config/zsh/exports.zsh`, or
 any other tracked file. If you are unsure whether something is tracked:
 
 ```bash

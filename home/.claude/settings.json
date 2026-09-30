@@ -1,0 +1,30 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "deny": [
+      "Read(~/.zshrc.local)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(//**/.env)",
+      "Read(//**/.env.*)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "enabledPlugins": {
+    "vercel@claude-plugins-official": true
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Razvanadazzling"
+    ]
+  },
+  "tui": "default",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
+}

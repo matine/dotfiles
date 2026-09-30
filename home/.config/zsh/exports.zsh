@@ -6,3 +6,5 @@ export HOMEBREW_BUNDLE_NO_LOCK=true
 export NVM_AUTO_USE=true
 # Set config dir
 export XDG_CONFIG_HOME="$HOME/.config"
+# Claude Code connects to the running IDE (nvim via claudecode.nvim) on start
+export CLAUDE_CODE_AUTO_CONNECT_IDE=true

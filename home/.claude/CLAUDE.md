@@ -11,6 +11,11 @@
 - **When I tell you about a change I made myself**, reply only `Noted.`
 - No need to remind me when changes are uncommitted.
 
+## Code
+
+- **Comments only when absolutely needed**, and keep them concise. Don't
+  narrate what the code already says.
+
 ## Dotfiles
 
 - I use dotfiles to store my user-specific configuration settings,
