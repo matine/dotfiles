@@ -19,3 +19,6 @@ npm-debug.log
 **/.config/herdr/session.json
 **/.config/herdr/release-notes.json
 **/.config/herdr/.plugins.lock
+
+# Neovim writes its log next to its config
+**/.config/nvim/nvim.log
